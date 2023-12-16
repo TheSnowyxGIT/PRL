@@ -15,19 +15,13 @@ subscriber.connect().then(() => {
       if (!match.data) {
         return;
       }
-      if (match.data.status !== 'LIVE') {
-        const foundMatch = await matchesRepository.findOne();
-        if (foundMatch) {
-          await matchesRepository.remove(foundMatch);
-        }
+
+      let foundMatch = await matchesRepository.findOne();
+      if (foundMatch) {
+        foundMatch = Object.assign(foundMatch, match.data);
+        await matchesRepository.save(foundMatch);
       } else {
-        let foundMatch = await matchesRepository.findOne();
-        if (foundMatch) {
-          foundMatch = Object.assign(foundMatch, match.data);
-          await matchesRepository.save(foundMatch);
-        } else {
-          await matchesRepository.save(match.data);
-        }
+        await matchesRepository.save(match.data);
       }
     } catch (error) {
       logger.warn(error);

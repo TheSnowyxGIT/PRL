@@ -19,7 +19,7 @@ const matchesRepository = source.getRepository('Match');
  *         description: A successful response
  */
 router.get('/live-matches', async (req, res) => {
-  const matches = await matchesRepository.find();
+  const matches = await matchesRepository.find({ where: { status: 'LIVE' } });
   res.send(matches);
 });
 
