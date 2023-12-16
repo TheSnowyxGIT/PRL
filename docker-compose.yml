@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 12341234
+    ports:
+      - 27017:27017
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+
+  prl-matches:
+    build: ./services/prl-matches
+    links:
+      - mongo
+      - redis
+    environment:
+      MONGO_URL: 'mongodb://root:12341234@mongo'
+      REDIS_URL: 'redis://redis'
+    ports:
+      - 3000:3000
+
+  prl-live-matches:
+    build: ./services/prl-api-live-matches
+    links:
+      - mongo
+      - redis
+    environment:
+      MONGO_URL: 'mongodb://root:12341234@mongo'
+      REDIS_URL: 'redis://redis'
+    ports:
+      - 3001:3000
+
+  prl-matches-history:
+    build: ./services/prl-api-matches-history
+    links:
+      - mongo
+      - redis
+    environment:
+      MONGO_URL: 'mongodb://root:12341234@mongo'
+      REDIS_URL: 'redis://redis'
+    ports:
+      - 3002:3000
