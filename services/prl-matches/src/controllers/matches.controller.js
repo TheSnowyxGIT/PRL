@@ -49,6 +49,42 @@ router.get('/:id', async (req, res) => {
  * @swagger
  * /matches:
  *  post:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              title:
+ *                type: string
+ *                example: PSG vs OM
+ *              competitorId1:
+ *                type: string
+ *                example: PSG
+ *              competitorId2:
+ *                type: string
+ *                example: OM
+ *              startDate:
+ *                type: string
+ *                example: 2021-08-29T20:00:00.000Z
+ *              endDate:
+ *                type: string
+ *                optional: true
+ *                example: 2021-08-29T20:00:00.000Z
+ *              status:
+ *                type: string
+ *                default: PREMATCH
+ *                enum:
+ *                  - PREMATCH
+ *                  - LIVE
+ *                  - ENDED
+ *              homeScore:
+ *                type: number
+ *                default: 0
+ *              awayScore:
+ *                type: number
+ *                default: 0
  *    tags:
  *      - matches
  *    description: Create new match
@@ -77,6 +113,46 @@ router.post('/', async (req, res) => {
  * @swagger
  * /matches/{id}:
  *  put:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              title:
+ *                type: string
+ *                example: PSG vs OM
+ *                optional: true
+ *              competitorId1:
+ *                type: string
+ *                example: PSG
+ *                optional: true
+ *              competitorId2:
+ *                type: string
+ *                example: OM
+ *                optional: true
+ *              startDate:
+ *                type: string
+ *                example: 2021-08-29T20:00:00.000Z
+ *                optional: true
+ *              endDate:
+ *                type: string
+ *                optional: true
+ *                example: 2021-08-29T20:00:00.000Z
+ *              status:
+ *                type: string
+ *                optional: true
+ *                enum:
+ *                  - PREMATCH
+ *                  - LIVE
+ *                  - ENDED
+ *              homeScore:
+ *                type: number
+ *                optional: true
+ *              awayScore:
+ *                type: number
+ *                optional: true
  *    tags:
  *      - matches
  *    description: Update match by id
