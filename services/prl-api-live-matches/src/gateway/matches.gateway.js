@@ -16,7 +16,9 @@ subscriber.connect().then(() => {
         return;
       }
 
-      let foundMatch = await matchesRepository.findOne();
+      let foundMatch = await matchesRepository.findOne({
+        where: { matchId: match.id },
+      });
       if (foundMatch) {
         foundMatch = Object.assign(foundMatch, match.data);
         await matchesRepository.save(foundMatch);

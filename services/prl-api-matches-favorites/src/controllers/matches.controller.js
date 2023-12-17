@@ -34,7 +34,7 @@ router.get('/match-favorites/:user_id', async (req, res) => {
       where: { user_id },
     });
     if (favorites_matches) {
-      res.send(favorites_matches);
+      res.send(favorites_matches.favorites);
     } else {
       res.status(404).send({ message: 'User not found' });
     }
