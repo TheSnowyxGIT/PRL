@@ -40,7 +40,11 @@ Default port **3003**
 
 If launched in local, you can access to the swagger documentation at http://localhost:3003/docs
 
+## Postman
+
 If you prefer, you can find a postman.json configuration file in the root of the project to test the API endpoints.
+
+## How to test the project
 
 For example one could follow does steps:
 
