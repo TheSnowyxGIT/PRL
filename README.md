@@ -46,7 +46,7 @@ If you prefer, you can find a postman.json configuration file in the root of the
 
 ## How to test the project
 
-For example one could follow does steps:
+For example, one could follow does steps:
 
 - To see all the notifications that are sent to users you can access the notification service in docker with the following commands:
 
