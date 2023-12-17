@@ -9,6 +9,10 @@ const Match = new EntitySchema({
       objectId: true,
       primary: true,
     },
+    matchId: {
+      type: String,
+      nullable: false,
+    },
     title: {
       type: String,
       nullable: false,

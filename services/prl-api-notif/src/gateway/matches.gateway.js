@@ -19,10 +19,12 @@ subscriber.connect().then(() => {
         return;
       }
 
-      let foundMatch = await matchesRepository.findOne({
-        where: { matchId: match.id },
+      const foundMatch = await matchesRepository.findOne({
+        where: { id: match.id },
       });
       if (foundMatch) {
+        const newMatch = { ...foundMatch };
+        Object.assign(newMatch, match.data);
         if (foundMatch.status !== 'LIVE' && match.data.status === 'LIVE') {
           const matchFav = await matchFavRepository.findOne({
             where: { matchId: match.id },
@@ -42,14 +44,14 @@ subscriber.connect().then(() => {
           if (matchFav) {
             matchFav.users.forEach((user) => {
               loggerNotif.log(
-                `Notif user ${user} for match ${match.id} is ended. FINAL SCORE: ${match.data.homeScore} - ${match.data.awayScore}`,
+                `Notif user ${user} for match ${match.id} is ended. FINAL SCORE: ${newMatch.homeScore} - ${newMatch.awayScore}`,
               );
             });
           }
         }
         if (
           foundMatch.homeScore + foundMatch.awayScore !==
-          match.data.homeScore + match.data.awayScore
+          newMatch.homeScore + newMatch.awayScore
         ) {
           const matchFav = await matchFavRepository.findOne({
             where: { matchId: match.id },
@@ -57,13 +59,12 @@ subscriber.connect().then(() => {
           if (matchFav) {
             matchFav.users.forEach((user) => {
               loggerNotif.log(
-                `Notif user ${user} for match ${match.id} score update. SCORE: ${match.data.homeScore} - ${match.data.awayScore}`,
+                `Notif user ${user} for match ${match.id} score update. SCORE: ${newMatch.homeScore} - ${newMatch.awayScore}`,
               );
             });
           }
         }
-        foundMatch = Object.assign(foundMatch, match.data);
-        await matchesRepository.save(foundMatch);
+        await matchesRepository.save(newMatch);
       } else {
         await matchesRepository.save(match.data);
       }

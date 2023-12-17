@@ -59,3 +59,12 @@ services:
       REDIS_URL: 'redis://redis'
     ports:
       - 3003:3000
+
+  prl-notif:
+    build: ./services/prl-api-notif
+    links:
+      - mongo
+      - redis
+    environment:
+      MONGO_URL: 'mongodb://root:12341234@mongo'
+      REDIS_URL: 'redis://redis'

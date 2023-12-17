@@ -36,6 +36,7 @@ router.get('/match-favorites/', async (req, res) => {
   try {
     if (!user_id) {
       res.status(401).send({ message: 'User ID is required' });
+      return;
     }
     const favorites_matches = await matchesFavoritesRepository.findOne({
       where: { user_id },
@@ -90,6 +91,7 @@ router.post('/match-favorites/:match_id', async (req, res) => {
   try {
     if (!user_id) {
       res.status(401).send({ message: 'User ID is required' });
+      return;
     }
     const user = await matchesFavoritesRepository.findOne({
       where: { user_id },
@@ -164,6 +166,7 @@ router.delete('/match-favorites/:match_id', async (req, res) => {
   try {
     if (!user_id) {
       res.status(401).send({ message: 'User ID is required' });
+      return;
     }
     const favorites_matches = await matchesFavoritesRepository.findOne({
       where: { user_id },

@@ -20,7 +20,12 @@ const matchesRepository = source.getRepository('Match');
  */
 router.get('/live-matches', async (req, res) => {
   const matches = await matchesRepository.find({ where: { status: 'LIVE' } });
-  res.send(matches);
+  const mappedMatches = matches.map((match) => {
+    // eslint-disable-next-line no-param-reassign
+    match.id = undefined;
+    return match;
+  });
+  res.send(mappedMatches);
 });
 
 module.exports = router;

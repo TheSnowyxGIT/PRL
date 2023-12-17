@@ -34,13 +34,13 @@ logger.log(`Swagger docs available at ${domain}/docs`);
 
 // routes
 const matchesRouter = require('./controllers/matches.controller');
-// const { connect } = require('./utils/redisContext');
+const { connect } = require('./utils/redisContext');
 
 app.use('/', matchesRouter);
 
 app.listen(port, async () => {
   logger.log(`App listening at ${domain}`);
   await open();
-  // await connect();
+  await connect();
   require('./gateway/matches.gateway');
 });

@@ -20,11 +20,11 @@ subscriber.connect().then(() => {
         where: { matchId: matchFav.matchId },
       });
       if (!foundMatchFav) {
-        matchFavRepository.create({
+        const mf = matchFavRepository.create({
           matchId: matchFav.matchId,
           users: [],
         });
-        foundMatchFav = await matchFavRepository.save();
+        foundMatchFav = await matchFavRepository.save(mf);
       }
       if (matchFav.type === 'ADD') {
         if (!foundMatchFav.users.includes(matchFav.userId)) {
