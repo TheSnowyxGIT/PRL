@@ -48,3 +48,14 @@ services:
       REDIS_URL: 'redis://redis'
     ports:
       - 3002:3000
+
+  prl-api-matches-favorites:
+    build: ./services/prl-api-matches-favorites
+    links:
+      - mongo
+      - redis
+    environment:
+      MONGO_URL: 'mongodb://root:12341234@mongo'
+      REDIS_URL: 'redis://redis'
+    ports:
+      - 3003:3000
