@@ -58,17 +58,17 @@ router.get('/match-favorites/:user_id', async (req, res) => {
  *        description: Numeric ID of the user to add a favorite match for
  *        schema:
  *          type: string
- *     - in: path
- *       name: match_id
- *       required: true
- *       description: Numeric ID of the match to add to favorites
- *       schema:
+ *      - in: path
+ *        name: match_id
+ *        required: true
+ *        description: Numeric ID of the match to add to favorites
+ *        schema:
  *          type: string
  *    responses:
  *      '200':
- *         description: A successful response with the list of favorites matches
+ *        description: A successful response with the list of favorites matches
  *      '404':
- *         description: User not found
+ *        description: User not found
  */
 router.post('/match-favorites/:user_id/:match_id', async (req, res) => {
   const user_id = req.params.user_id;
@@ -97,7 +97,7 @@ router.post('/match-favorites/:user_id/:match_id', async (req, res) => {
 /**
  * @swagger
  * /match-favorites/{user_id}/{match_id}:
- *  post:
+ *  delete:
  *    tags:
  *      - match-favorites
  *    summary: Delete a favorite match from user
@@ -109,17 +109,17 @@ router.post('/match-favorites/:user_id/:match_id', async (req, res) => {
  *        description: Numeric ID of the user to delete a favorite match for
  *        schema:
  *          type: string
- *     - in: path
- *       name: match_id
- *       required: true
- *       description: Numeric ID of the match to delete from favorites
- *       schema:
+ *      - in: path
+ *        name: match_id
+ *        required: true
+ *        description: Numeric ID of the match to delete from favorites
+ *        schema:
  *          type: string
  *    responses:
  *      '200':
- *         description: A successful response with the list of favorites matches
+ *        description: A successful response with the list of favorites matches
  *      '404':
- *         description: User not found
+ *        description: User not found
  */
 router.delete('/match-favorites/:user_id/:match_id', async (req, res) => {
   const user_id = req.params.user_id;
