@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { ZodError } = require('zod');
 const { Logger } = require('../utils/logger');
+const { publisher } = require('../utils/redisContext');
 
 // simple CRUD for matches
 
