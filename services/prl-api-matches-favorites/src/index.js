@@ -1,6 +1,7 @@
 const express = require('express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
 const { appConfig } = require('./config/app.config');
 const { Logger } = require('./utils/logger');
 const { open } = require('./utils/dbContext');
@@ -27,16 +28,19 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use(express.json());
+app.use(cors());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 logger.log(`Swagger docs available at ${domain}/docs`);
 
 // routes
 const matchesRouter = require('./controllers/matches.controller');
+// const { connect } = require('./utils/redisContext');
 
 app.use('/', matchesRouter);
 
 app.listen(port, async () => {
   logger.log(`App listening at ${domain}`);
   await open();
+  // await connect();
   require('./gateway/matches.gateway');
 });

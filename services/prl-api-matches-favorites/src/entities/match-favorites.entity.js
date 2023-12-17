@@ -9,7 +9,7 @@ const MatchFavorites = new EntitySchema({
       objectId: true,
       primary: true,
     },
-    userId: {
+    user_id: {
       type: 'string',
       nullable: false,
     },

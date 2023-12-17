@@ -19,5 +19,8 @@ module.exports = {
     'no-console': 'off',
     'consistent-return': 'off',
     'global-require': 'off',
+    camelcase: 'off',
+    'no-await-in-loop': 'off',
+    'no-restricted-syntax': 'off',
   },
 };
