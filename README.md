@@ -48,10 +48,13 @@ If you prefer, you can find a postman.json configuration file in the root of the
 
 For example one could follow does steps:
 
-- To see all the notifications that are sent to users you can access the notification service in docker with the following command:
+- To see all the notifications that are sent to users you can access the notification service in docker with the following commands:
 
 ```bash
 docker ps # to get the container id
+```
+
+```bash
 docker logs -f {notification_service_container_id}
 ```
 
